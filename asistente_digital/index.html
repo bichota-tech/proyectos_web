@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="imagenes/icon.png" type="image/x-icon">
+    <title>Check!</title>
+</head>
+
+<body>
+    <main>
+
+        <div class="logo">
+            <img class="check" src="imagenes/Check.png" alt="checklogo">
+            <h1 class="check">Check!</h1>
+        </div>
+        <h2 id="slogan">
+            Menos caos, más foco
+        </h2>
+        <nav class="menu">
+            <input type="checkbox" href="#" class="menu-open" name="menu-open" id="menu-open" />
+            <label class="menu-open-button" for="menu-open">
+                <span class="hamburger hamburger-1"></span>
+                <span class="hamburger hamburger-2"></span>
+                <span class="hamburger hamburger-3"></span>
+            </label>
+
+            <a href="estudiante.html" class="menu-item"> <i class="bi bi-backpack3"></i> </a>
+            <a href="ciudadano.html" class="menu-item"> <i class="bi bi-person-check"></i> </a>
+            <a href="empresa.html" class="menu-item"> <i class="bi bi-building-check"></i> </a>
+        </nav>
+
+        <!-- filters -->
+        <svg xmlns="http://www.w3.org/2000/svg" version="1.13.1">
+            <defs>
+                <filter id="shadowed-goo">
+
+                    <feGaussianBlur in="SourceGraphic" result="blur" stdDeviation="10" />
+                    <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7"
+                        result="goo" />
+                    <feGaussianBlur in="goo" stdDeviation="3" result="shadow" />
+                    <feColorMatrix in="shadow" mode="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 -0.2"
+                        result="shadow" />
+                    <feOffset in="shadow" dx="1" dy="1" result="shadow" />
+                    <feBlend in2="shadow" in="goo" result="goo" />
+                    <feBlend in2="goo" in="SourceGraphic" result="mix" />
+                </filter>
+
+            </defs>
+        </svg>
+
+        <footer>
+            <p>&copy; 2025 ACMA. Todos los derechos reservados.</p>
+        </footer>
+    </main>
+    <script>
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const container = document.querySelector('.logo');
+            container.classList.add('active');
+        });
+    </script>
+
+    <!-- <script>
+        const video = document.getElementById("gif");
+        const titulo = document.getElementById("check");
+        const slogan = document.getElementById("slogan");
+        titulo.style.opacity = 0;
+        slogan.style.opacity = 0;
+
+        video.addEventListener("ended", () => {
+
+            titulo.style.transition = "opacity 1.5s ease";
+            slogan.style.transition = "opacity 1.5s ease";
+            slogan.style.opacity = 1;
+            titulo.style.opacity = 1;
+
+        });
+    </script> -->
+
+</body>
+
+</html>
