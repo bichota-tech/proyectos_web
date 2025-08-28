@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="imagenes/icon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="imagenes/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="eststyle.css">
     <title>Check! Estudiante</title>
 </head>
@@ -13,12 +15,6 @@
 <body data-storage="tasks_estudiante">
 
     <header>
-        <div class="logo">
-            <img src="imagenes/check_est1.png" alt="check_logo">
-            <h2>Modo Estudiante</h2>
-        </div>
-        <div id="toast-container"></div>
-
         <nav class="menu">
             <input type="checkbox" href="#" class="menu-open" name="menu-open" id="menu-open" />
             <label class="menu-open-button" for="menu-open">
@@ -26,16 +22,13 @@
                 <span class="hamburger hamburger-2"></span>
                 <span class="hamburger hamburger-3"></span>
             </label>
-
-
-            <a href="ciudadano.html" class="menu-item"> <i class="bi bi-person-check"></i> </a>
-            <a href="empresa.html" class="menu-item"> <i class="bi bi-building-check"></i> </a>
+            <a href="ciudadano.html" class="menu-item"><img src="imagenes/ciudadanos.png" class="item"></a>
+            <a href="empresa.html" class="menu-item"><img src="imagenes/empresa.png" class="item"></a>
         </nav>
 
         <svg xmlns="http://www.w3.org/2000/svg" version="1.13.1">
             <defs>
                 <filter id="shadowed-goo">
-
                     <feGaussianBlur in="SourceGraphic" result="blur" stdDeviation="10" />
                     <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7"
                         result="goo" />
@@ -50,56 +43,63 @@
             </defs>
         </svg>
 
+        <div id="toast-container"></div>
+
+        <div class="logo">
+            <h2>Modo Estudiante</h2>
+            <img src="imagenes/logo2.png" alt="check_logo">
+        </div>
     </header>
 
     <main>
         <section class="tabla_tareas">
             <h3>Lista de Tareas</h3>
-
-            <table border="1">
+            <table border="1" class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Titulo</th>
-                        <th>Asignatura</th>
+                        <th>Título</th>
+                        <th>Clase</th>
                         <th>Fecha</th>
-                        <th>Acciones</th>
+                        <th>Acción</th>
                     </tr>
                 </thead>
-                <TBody id="taskTable"></TBody>
+                <TBody id="taskTable" class="table-group-divider"></TBody>
             </table>
-
-
         </section>
 
-        <section class="crear_tarea">
-            <fieldset>
-                <legend>Crear Tarea</legend>
-                <form id="taskForm" method="get">
-                    <label for="name_1">Nombre*</label>
-                    <select name="name_1" id="name_1" required>
-                        <option value="empty">Seleccione una categoría</option>
-                        <option value="v_1">Exámenes</option>
-                        <option value="v_2">Trabajos</option>
-                        <option value="v_3">Clases</option>
-                    </select>
-                    <label for="name_2">Asignatura*</label>
-                    <select name="name_2" id="name_2" required>
-                        <option value="">Seleccione una asignatura</option>
-                        <option value="v_1">Matématica</option>
-                        <option value="v_2">Lengua Castellana</option>
-                        <option value="v_3">Lengua Inglesa</option>
-                        <option value="v_4">Gimnasia</option>
-                        <option value="v_5">Geografía</option>
-                        <option value="v_6">Historia Española</option>
-                        <option value="v_7">Ciencias Sociales</option>
-                    </select>
-                    <label for="date">Fecha Entrega*</label>
-                    <input type="date" name="date" id="date" required>
-                    <label for="text">Resumen de Tarea</label>
-                    <textarea name="text" id="text" rows="6" cols="39"></textarea>
-                    <button type="submit">Añadir Tarea</button>
-                </form>
-            </fieldset>
+        <button class="fab" id="openFormBtn">+</button>
+
+        <section class="modal" id="formModal">
+                <div class="modal-content">
+                    <h3>Añadir nueva tarea</h3>
+                    <fieldset>
+                        <form id="taskForm" method="get">
+                            <label for="name_1">Título*</label>
+                            <select name="name_1" id="name_1" required>
+                                <option value="empty">Seleccione una categoría</option>
+                                <option value="v_1">Exámenes</option>
+                                <option value="v_2">Trabajos</option>
+                                <option value="v_3">Clases</option>
+                            </select>
+                            <label for="name_2">Clase*</label>
+                            <select name="name_2" id="name_2" required>
+                                <option value="">Seleccione una asignatura</option>
+                                <option value="v_1">Matématica</option>
+                                <option value="v_2">Lengua Castellana</option>
+                                <option value="v_3">Lengua Inglesa</option>
+                                <option value="v_4">Gimnasia</option>
+                                <option value="v_5">Geografía</option>
+                                <option value="v_6">Historia Española</option>
+                                <option value="v_7">Ciencias Sociales</option>
+                            </select>
+                            <label for="date">Fecha Entrega*</label>
+                            <input type="date" name="date" id="date" required>
+                            <label for="text">Resumen de Tarea</label>
+                            <textarea name="text" id="text" rows="6" cols="39"></textarea>
+                            <button type="submit">Añadir Tarea</button>
+                        </form>
+                    </fieldset>
+                </div>
         </section>
     </main>
     <footer>

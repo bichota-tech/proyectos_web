@@ -38,15 +38,15 @@ div.logo.active .check{
 }
 
 img.check {
-  width: clamp(4rem, 9vw, 8rem);
+  width: clamp(5rem, 12vw, 8rem);
   height: auto;
   border: none;
   
 }
 
 h1.check {
-  font-size: clamp(5rem, 12vw, 9.5rem);
-  color: #43c467;
+  font-size: clamp(5rem, 12vw, 7.5rem);
+  color: #58ba3f;
 }
 
 h2#slogan {
@@ -140,8 +140,13 @@ a {
 }
 
 .menu-item:hover {
-  background: rgb(248, 247, 247);
-  color: #43c467;
+  background: #58ba3f;
+  
+}
+
+img.item{
+    vertical-align: middle;
+    width: clamp(2rem, 3vw, 2.5rem);
 }
 
 /* .menu-item:nth-child(3) {
