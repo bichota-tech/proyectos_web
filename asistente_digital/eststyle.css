@@ -18,6 +18,7 @@ header {
     justify-content: space-between;
     position: relative;
     height: 4rem;
+    margin-bottom: 1rem;
 }
 
 /* Menú hamburguesa */
@@ -199,13 +200,17 @@ h2 {
 }
 
 section.tabla_tareas {
-    display: flex;
+    /* display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-wrap: nowrap;
+    justify-content: center; */
+    display: grid;
+    grid-template-rows: auto 1fr;
     align-content: center;
-    height: auto;
     width: auto;
+    height: 77dvh;
+    min-height: 0;
+    overflow-y: auto;
     margin-top: 1rem;
     margin-bottom: 2.5rem;
     margin-inline: 1rem;
@@ -224,10 +229,16 @@ table {
     box-sizing: border-box;
     border-spacing: .1rem;
     border: #43b1c4 1px solid;
-    width: auto;
+    width: 100%;
+    min-height: 0;
+    overflow: auto;
     margin-bottom: .5rem;
     text-align: center;
     font-size: small;
+}
+
+table th, table td{
+    overflow-wrap: anywhere;
 }
 
 h3,
@@ -240,6 +251,7 @@ button {
 h3{
     color: rgb(37, 37, 37);
     text-align: center;
+    position: sticky;
 }
 
 h3.desktop {
@@ -249,7 +261,7 @@ h3.desktop {
 /* Botón flotante */
 .fab {
     position: fixed;
-    bottom: 5rem;
+    bottom: 1rem;
     right: 1.5rem;
     width: auto;
     height: auto;
@@ -407,6 +419,7 @@ footer {
         flex-direction: row;
         justify-content: space-around;
         width: 100%;
+        height: 100%;
     }
 
     section.tabla_tarea,
@@ -465,7 +478,7 @@ footer {
         flex-direction: column;
         justify-content: center;
         max-width: 40%;
-        height: 60dvh;
+        height: 40%;
     }
 
     form {
