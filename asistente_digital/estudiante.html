@@ -13,7 +13,6 @@
 </head>
 
 <body data-storage="tasks_estudiante">
-
     <header>
         <nav class="menu">
             <input type="checkbox" href="#" class="menu-open" name="menu-open" id="menu-open" />
@@ -67,40 +66,41 @@
             </table>
         </section>
 
-        <button class="fab" id="openFormBtn">+</button>
+        <button id="openFormBtn" class="fab" type="button">Nueva tarea</button>
 
         <section class="modal" id="formModal">
-                <div class="modal-content">
-                    <h3>Añadir nueva tarea</h3>
-                    <fieldset>
-                        <form id="taskForm" method="get">
-                            <label for="name_1">Título*</label>
-                            <select name="name_1" id="name_1" required>
-                                <option value="empty">Seleccione una categoría</option>
-                                <option value="v_1">Exámenes</option>
-                                <option value="v_2">Trabajos</option>
-                                <option value="v_3">Clases</option>
-                            </select>
-                            <label for="name_2">Clase*</label>
-                            <select name="name_2" id="name_2" required>
-                                <option value="">Seleccione una asignatura</option>
-                                <option value="v_1">Matématica</option>
-                                <option value="v_2">Lengua Castellana</option>
-                                <option value="v_3">Lengua Inglesa</option>
-                                <option value="v_4">Gimnasia</option>
-                                <option value="v_5">Geografía</option>
-                                <option value="v_6">Historia Española</option>
-                                <option value="v_7">Ciencias Sociales</option>
-                            </select>
-                            <label for="date">Fecha Entrega*</label>
-                            <input type="date" name="date" id="date" required>
-                            <label for="text">Resumen de Tarea</label>
-                            <textarea name="text" id="text" rows="6" cols="39"></textarea>
-                            <button type="submit">Añadir Tarea</button>
-                        </form>
-                    </fieldset>
-                </div>
+            <div class="modal-content">
+                <h3>Añadir nueva tarea</h3>
+                <form id="taskForm" method="get">
+                    <label for="name_1">Título*</label>
+                    <select name="name_1" id="name_1" required>
+                        <option value="">Seleccione una categoría</option>
+                        <option value="v_1">Exámenes</option>
+                        <option value="v_2">Trabajos</option>
+                        <option value="v_3">Clases</option>
+                    </select>
+                    <label for="name_2">Clase*</label>
+                    <select name="name_2" id="name_2" required>
+                        <option value="">Seleccione una asignatura</option>
+                        <option value="v_1">Matématica</option>
+                        <option value="v_2">Lengua Castellana</option>
+                        <option value="v_3">Lengua Inglesa</option>
+                        <option value="v_4">Gimnasia</option>
+                        <option value="v_5">Geografía</option>
+                        <option value="v_6">Historia Española</option>
+                        <option value="v_7">Ciencias Sociales</option>
+                    </select>
+                    <label for="date">Fecha Entrega*</label>
+                    <input type="date" name="date" id="date" required>
+                    <label for="text">Resumen de Tarea</label>
+                    <textarea name="text" id="text" rows="6" cols="39"></textarea>
+                    <button type="submit">Añadir Tarea</button>
+                </form>
+            </div>
         </section>
+        <div class="task-form-desktop">
+            <h3 class="desktop">Añadir nueva tarea</h3>
+        </div>
     </main>
     <footer>
         <p>&copy; 2025 ACMA. Todos los derechos reservados.</p>

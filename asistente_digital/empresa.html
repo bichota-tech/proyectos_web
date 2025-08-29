@@ -53,7 +53,6 @@
     <main>
         <section class="tabla_tareas">
             <h3>Lista de Proyectos</h3>
-
             <table border="1" class="table table-striped">
                 <thead>
                     <tr>
@@ -67,9 +66,11 @@
             </table>
         </section>
 
-        <section class="crear_tarea">
-            <h3>Añadir nuevo proyecto</h3>
-            <fieldset>
+        <button id="openFormBtn" class="fab" type="button">Nuevo proyecto</button>
+
+        <section class="modal" id="formModal">
+            <div class="modal-content">
+                <h3>Añadir nuevo proyecto</h3>
                 <form id="taskForm" method="get">
                     <label for="name_1">Proyecto*</label>
                     <input type="text" name="name" id="name_1" required>
@@ -81,8 +82,11 @@
                     <textarea name="text" id="text" rows="6" cols="39"></textarea>
                     <button type="submit">Añadir Proyecto</button>
                 </form>
-            </fieldset>
+            </div>
         </section>
+        <div class="task-form-desktop">
+            <h3 class="desktop">Añadir nuevo proyecto</h3>
+        </div>
     </main>
     <footer>
         <p>&copy; 2025 ACMA. Todos los derechos reservados.</p>

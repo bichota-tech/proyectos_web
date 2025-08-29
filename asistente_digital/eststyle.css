@@ -147,7 +147,6 @@ img.item {
     width: clamp(2.3rem, 4vw, 3rem);
     object-fit: cover;
     border-radius: 10px;
-
 }
 
 h2 {
@@ -238,18 +237,25 @@ button {
     font-size: large;
 }
 
+h3{
+    color: rgb(37, 37, 37);
+    text-align: center;
+}
+
+h3.desktop {
+    display: none;
+}
+
 /* Botón flotante */
 .fab {
     position: fixed;
-    bottom: 1.5rem;
+    bottom: 5rem;
     right: 1.5rem;
-    width: 3.5rem;
-    height: 3.5rem;
-    border-radius: 50%;
+    width: auto;
+    height: auto;
     border: none;
     background: #157ad9;
     color: white;
-    font-size: 2rem;
     cursor: pointer;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
     transition: transform 0.2s ease;
@@ -262,57 +268,27 @@ button {
 
 /* Fondo oscuro */
 .modal {
+    display: none;
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.2);
-    display: flex;
+    background: rgba(0, 0, 0, 0.5);
     justify-content: center;
-    align-items: flex-end;
-    /* pegado abajo */
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-    z-index: 20;
-    width: 100%;
+    align-items: center;
+    max-height: 100vh; 
+    overflow: auto;
 }
 
-/* Contenedor del modal */
-.modal-content {
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    background: white;
-    width: 90%;
-    max-height: 80%;
-    border-radius: 1rem 1rem 0 0;
-    padding: 1.5rem;
-    transform: translateY(100%);
-    transition: transform 0.3s ease;
-    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.2);
-}
-
-/* Botón cerrar */
-.close-btn {
-    background: none;
-    border: none;
-    font-size: 2rem;
-    color: #666;
-    position: absolute;
-    right: 1rem;
-    top: 1rem;
-    cursor: pointer;
-}
-
-/* Estado activo */
 .modal.active {
-    visibility: visible;
-    opacity: 1;
+    display: flex;
 }
 
-.modal.active .modal-content {
-    transform: translateY(0);
+.modal-content {
+    background: white;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    width: 90%;
+    
 }
-
 
 section.crear_tarea {
     display: flex;
@@ -335,6 +311,7 @@ form {
 }
 
 label {
+    color: rgb(37, 37, 37);
     text-align: left;
     font-size: small;
 }
@@ -354,7 +331,9 @@ textarea {
     margin-top: .3rem;
     margin-bottom: 1rem;
     width: 100%;
-    padding: .2rem;
+    max-height: 150px; /* altura máxima */
+    overflow-y: auto; /* muestra scroll vertical cuando hay demasiado texto */
+    resize: none; /* (opcional) desactiva el redimensionamiento manual */
 }
 
 button {
@@ -423,14 +402,22 @@ footer {
 
 @media (min-width: 768px) {
 
-    section {
+    main {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        width: 100%;
+    }
+
+    section.tabla_tarea,
+    div.task-form-desktop {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-content: center;
         height: auto;
-        width: 90%;
-        margin-top: 2rem;
+        width: auto;
+        margin-top: 1rem;
         margin-bottom: 2.5rem;
         margin-inline: 1rem;
         padding: 1rem;
@@ -442,45 +429,50 @@ footer {
         -moz-box-shadow: 0px 0px 12px 4px rgba(0, 0, 0, 0.2);
     }
 
-    .fab{
-        display: none;
-    }
-    .modal {
+    #openFormBtn,
+    #formModal {
         display: none;
     }
 
-    main {
+    .container-desktop {
         display: flex;
-        flex-direction: row;
-        justify-content: space-around;
+        justify-content: center;
+        gap: 2rem;
     }
 
-    
+    .task-form-desktop form input,
+    .task-form-desktop form button {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
 
+    }
+    
+    h3.desktop {
+        display: block;
+        text-align: center;
+    }
 
     section.tabla_tareas {
         display: flex;
         flex-direction: column;
         justify-content: left;
-        width: 40%;
-    }
-
-    section.crear_tarea {
-        display: flex;
-        flex-direction: column;
-        justify-content: right;
         width: 50%;
-        padding: 1rem;
-
     }
 
-    fieldset {
-        display: block;
-        margin-inline: 2rem;
+    div.task-form-desktop{
+         display: flex;
+        flex-direction: column;
+        justify-content: center;
+        max-width: 40%;
+        height: 60dvh;
     }
 
-    h3 {
-        text-align: center;
+    form {
+        display: flex;
+        justify-content: center;
+        align-items: left;
+        width: 100%;
     }
 
 }

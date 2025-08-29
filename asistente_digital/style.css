@@ -58,6 +58,16 @@ h2#slogan {
   
 }
 
+p.resume {
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  color: gray;
+  margin: auto;
+  margin-bottom: 0;
+  width: 90%;
+  max-width: 600px;
+  line-height: 1.5;
+  text-align: center;
+}
 
 a {
   color: inherit;
@@ -71,7 +81,7 @@ a {
 
 .menu-item,
 .menu-open-button {
-  background: #43b1c4;
+  background: #157ad9;
   border-radius: 100%;
   width: 5rem;
   height: 5rem;

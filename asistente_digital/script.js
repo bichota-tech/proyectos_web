@@ -100,84 +100,110 @@ function renderTasks() {
 document.addEventListener("DOMContentLoaded", () => {
   // ====== Cache de elementos ======
   const modal = document.getElementById("formModal");
+  const modalContent = modal?.querySelector(".modal-content") || modal;
   const openBtn = document.getElementById("openFormBtn");
   const closeBtn = document.getElementById("closeFormBtn");
   const taskForm = document.getElementById("taskForm");
+  const taskFormDesktopContainer = document.querySelector(".task-form-desktop");
 
-  // ====== Abrir / cerrar modal (con guardas) ======
+  // Función robusta para mover el formulario según layout
+  function checkLayout(mq) {
+    const isDesktop = (typeof mq === "object") ? !!mq.matches : window.matchMedia("(min-width:768px)").matches;
+    if (isDesktop) {
+      if (taskFormDesktopContainer && taskForm && modalContent.contains(taskForm)) {
+        taskFormDesktopContainer.appendChild(taskForm); // mueve TODO el form con labels incluidos
+      }
+    } else {
+      if (modalContent && taskForm && !modalContent.contains(taskForm)) {
+        modalContent.appendChild(taskForm);
+      }
+    }
+  }
+
+  const mediaQuery = window.matchMedia("(min-width: 768px)");
+  // API moderna y fallback para compatibilidad
+  if (mediaQuery.addEventListener) mediaQuery.addEventListener("change", checkLayout);
+  else mediaQuery.addListener(checkLayout);
+  checkLayout(mediaQuery); // ejecutar al cargar
+
+  // Mobile: abrir y cerrar modal
   openBtn?.addEventListener("click", () => modal?.classList.add("active"));
   closeBtn?.addEventListener("click", () => modal?.classList.remove("active"));
-  modal?.addEventListener("click", (e) => {
-    if (e.target === modal) modal.classList.remove("active");
-  });
+  modal?.addEventListener("click", (e) => { if (e.target === modal) modal.classList.remove("active"); });
 
-  // ====== Submit (único) ======
-  if (taskForm) {
-    taskForm.addEventListener("submit", (e) => {
-      e.preventDefault();
+  // ===== Helpers para obtener valores legibles y raw (validación) =====
+  function getFieldDisplayValue(field) {
+    if (!field) return "";
+    const tag = field.tagName?.toLowerCase();
+    const type = field.type?.toLowerCase?.();
 
-      const input1 = document.getElementById("name_1");
-      const input2 = document.getElementById("name_2");
-      const dateInput = document.getElementById("date");
-
-      if (!input1 || !input2 || !dateInput) {
-        console.error("Faltan campos del formulario.");
-        return;
+    if (tag === "select") {
+      return field.options[field.selectedIndex]?.text?.trim() ?? field.value ?? "";
+    }
+    if (type === "checkbox") {
+      const id = field.id;
+      if (id) {
+        const lab = document.querySelector(`label[for="${id}"]`);
+        if (lab) return field.checked ? lab.textContent.trim() : "No";
       }
-
-      [input1, input2, dateInput].forEach(clearError);
-
-      let name1, name2;
-
-      // Manejo genérico: input o select
-      if (input1.tagName === "SELECT") {
-        if (!input1.value || input1.value === "empty") {
-          showError(input1, "Selecciona una categoría válida.");
-          return;
-        }
-        name1 = input1.selectedOptions[0].text;
-      } else {
-        name1 = input1.value.trim();
-        if (!name1) {
-          showError(input1, "Este campo es obligatorio.");
-          return;
-        }
+      return field.checked ? "Sí" : "No";
+    }
+    if (type === "radio") {
+      const checked = document.querySelector(`input[name="${field.name}"]:checked`);
+      if (checked) {
+        const id2 = checked.id;
+        const lab = id2 ? document.querySelector(`label[for="${id2}"]`) : null;
+        return (lab ? lab.textContent.trim() : checked.value);
       }
-
-      if (input2.tagName === "SELECT") {
-        if (!input2.value) {
-          showError(input2, "Selecciona una opción válida.");
-          return;
-        }
-        name2 = input2.selectedOptions[0].text;
-      } else {
-        name2 = input2.value.trim();
-        if (!name2) {
-          showError(input2, "Este campo es obligatorio.");
-          return;
-        }
-      }
-
-      const date = dateInput.value;
-      if (!date) {
-        showError(dateInput, "La fecha es obligatoria.");
-        return;
-      }
-      if (!isFutureDate(date)) {
-        showError(dateInput, "La fecha debe ser hoy o futura.");
-        return;
-      }
-
-      if (isDuplicate(name1, name2, date)) {
-        showError(input1, "Ya existe un registro con estos datos.");
-        return;
-      }
-
-      addTask({ name1, name2, date });
-      taskForm.reset();
-      modal?.classList.remove("active");
-    });
+      return "";
+    }
+    return field.value?.trim() ?? "";
   }
+
+  function getRawValue(field) {
+    if (!field) return "";
+    const tag = field.tagName?.toLowerCase();
+    const type = field.type?.toLowerCase?.();
+
+    if (tag === "select") return field.value;
+    if (type === "checkbox") return field.checked;
+    if (type === "radio") {
+      const checked = document.querySelector(`input[name="${field.name}"]:checked`);
+      return checked ? checked.value : "";
+    }
+    return field.value?.trim() ?? "";
+  }
+
+
+  // Listener submit (sirve tanto mobile como desktop)
+  taskForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const input1 = document.getElementById("name_1");
+    const input2 = document.getElementById("name_2");
+    const dateInput = document.getElementById("date");
+
+    [input1, input2, dateInput].forEach(clearError);
+
+    // usamos raw para validaciones y display para guardar lo legible por el usuario
+    const rawName1 = getRawValue(input1);
+    const rawName2 = getRawValue(input2);
+    const rawDate = getRawValue(dateInput);
+
+    const name1 = getFieldDisplayValue(input1);
+    const name2 = getFieldDisplayValue(input2);
+    const date = getFieldDisplayValue(dateInput);
+
+    if (!rawName1) return showError(input1, "Obligatorio");
+    if (!rawName2) return showError(input2, "Obligatorio");
+    if (!rawDate) return showError(dateInput, "Obligatorio");
+    if (!isFutureDate(rawDate)) return showError(dateInput, "Fecha inválida");
+    if (isDuplicate(name1, name2, date)) return showError(input1, "Duplicado");
+
+
+    addTask({ name1, name2, date });
+    taskForm.reset();
+    if (!mediaQuery.matches) modal.classList.remove("active"); // cerrar solo mobile
+  });
 
   // ====== Delegación para eliminar ======
   document.addEventListener("click", (e) => {
