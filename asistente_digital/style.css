@@ -4,7 +4,6 @@ body {
   margin: 0;
 }
 
-
 main {
   height: 100vh;
    background: linear-gradient( rgb(255, 255, 255),
@@ -13,9 +12,6 @@ main {
   background-size: cover;
   background-position: right;
 }
-
-
-
 
 div.logo {
   display: flex;
@@ -41,7 +37,6 @@ img.check {
   width: clamp(5rem, 12vw, 8rem);
   height: auto;
   border: none;
-  
 }
 
 h1.check {
@@ -55,7 +50,6 @@ h2#slogan {
   margin-top: -3rem;
   font-weight: 600;
   text-align: center;
-  
 }
 
 p.resume {
@@ -87,7 +81,7 @@ a {
   height: 5rem;
   margin-left: -40px;
   position: absolute;
-  top: 8rem;
+  top: 5rem;
   color: white;
   text-align: center;
   line-height: 80px;
