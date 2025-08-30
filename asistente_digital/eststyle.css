@@ -353,12 +353,9 @@ textarea {
     margin-top: .3rem;
     margin-bottom: 1rem;
     width: 100%;
-    max-height: 150px;
-    /* altura máxima */
-    overflow-y: auto;
-    /* muestra scroll vertical cuando hay demasiado texto */
-    resize: none;
-    /* (opcional) desactiva el redimensionamiento manual */
+    max-height: 150px; /* altura máxima */
+    overflow-y: auto; /* muestra scroll vertical cuando hay demasiado texto */
+    resize: none; /* (opcional) desactiva el redimensionamiento manual */
 }
 
 button {
