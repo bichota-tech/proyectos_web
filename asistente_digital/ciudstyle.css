@@ -199,13 +199,17 @@ h2 {
 }
 
 section.tabla_tareas {
-    display: flex;
+    /* display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-wrap: nowrap;
+    justify-content: center; */
+    display: grid;
+    grid-template-rows: auto 1fr;
     align-content: center;
-    height: auto;
     width: auto;
+    height: auto;
+    min-height: 0;
+    overflow-y: auto;
     margin-top: 1rem;
     margin-bottom: 2.5rem;
     margin-inline: 1rem;
@@ -218,16 +222,31 @@ section.tabla_tareas {
     -moz-box-shadow: 0px 0px 12px 4px rgba(0, 0, 0, 0.2);
 }
 
-table {
-    display: table;
+table.table {
+    width: 100%;
     border-collapse: collapse;
-    box-sizing: border-box;
-    border-spacing: .1rem;
-    border: #43b1c4 1px solid;
-    width: auto;
-    margin-bottom: .5rem;
     text-align: center;
     font-size: small;
+}
+
+.table tbody {
+    display: block;
+    max-height: calc(78px*5);
+    overflow-y: auto;
+}
+
+.table thead,
+.table tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.table th,
+.table td {
+    padding: 8px;
+    border: 1px solid #157ad9;
+    height: 30px;
 }
 
 h3,
@@ -240,6 +259,7 @@ button {
 h3{
     color: rgb(37, 37, 37);
     text-align: center;
+    position: sticky;
 }
 
 h3.desktop {
@@ -253,6 +273,7 @@ h3.desktop {
     right: 1.5rem;
     width: auto;
     height: auto;
+    margin-block: .5rem;
     border: none;
     background: #157ad9;
     color: white;
@@ -377,6 +398,7 @@ footer p {
 }
 
 footer {
+    display: none;
     position: fixed;
     bottom: 0;
     left: 0;
@@ -386,6 +408,19 @@ footer {
 }
 
 @media (min-width:425px) {
+
+    .table tbody {
+        display: block;
+        max-height: calc(80px*6);
+        overflow-y: auto;
+    }
+
+    .table th,
+    .table td {
+        padding: 6.5px;
+        border: 1px solid #157ad9;
+        height: 30px;
+    }
 
     h3 {
         text-align: center;
@@ -430,6 +465,19 @@ footer {
         -moz-box-shadow: 0px 0px 12px 4px rgba(0, 0, 0, 0.2);
     }
 
+    .table tbody {
+        display: block;
+        max-height: calc(66px*6);
+        overflow-y: auto;
+    }
+
+    .table th,
+    .table td {
+        padding: 6.5px;
+        border: 1px solid #157ad9;
+        height: 30px;
+    }
+
     #openFormBtn,
     #formModal {
         display: none;
@@ -466,7 +514,7 @@ footer {
         flex-direction: column;
         justify-content: center;
         max-width: 40%;
-        height: 60dvh;
+        height: 40%;
     }
 
     form {
@@ -474,6 +522,10 @@ footer {
         justify-content: center;
         align-items: left;
         width: 100%;
+    }
+
+    footer{
+        display: block;
     }
 
 }

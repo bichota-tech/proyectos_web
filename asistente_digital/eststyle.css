@@ -235,7 +235,6 @@ table.table {
     overflow-y: auto;
 }
 
-
 .table thead,
 .table tbody tr {
     display: table;
@@ -248,7 +247,6 @@ table.table {
     padding: 8px;
     border: 1px solid #157ad9;
     height: 30px;
-
 }
 
 h3,
